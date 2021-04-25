@@ -68,7 +68,8 @@ CREATE TABLE `tb_parking_statistics`  (
   `parking_usable` int(11) NULL DEFAULT 0 COMMENT '可使用车位',
   `price` decimal(8, 2) NULL DEFAULT NULL COMMENT '价格/小时',
   `total` decimal(8, 2) NULL DEFAULT NULL COMMENT '最大价格/每日',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `type` (`type`) USING HASH COMMENT '类型索引'
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = gbk COLLATE = gbk_chinese_ci COMMENT = '车位统计表' ROW_FORMAT = Compact;
 
 -- ----------------------------
