@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.parking.mapper.ParkingStatisticsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.parking.entity.ParkingStatistics">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="parking_sum" property="parkingSum" />
+        <result column="parking_usable" property="parkingUsable" />
+        <result column="price" property="price" />
+        <result column="total" property="total" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, parking_sum, parking_usable, price, total
+    </sql>
+
+    <select id="getEntityByType" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from tb_parking_statistics where type = #{type}
+    </select>
+
+    <update id="usableAdd">
+        update tb_parking_statistics set parking_usable = parking_usable + 1 where type = #{type}
+    </update>
+
+</mapper>

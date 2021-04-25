@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.parking.mapper.CarStopLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.parking.entity.CarStopLog">
+        <id column="id" property="id" />
+        <result column="car_id" property="carId" />
+        <result column="type" property="type" />
+        <result column="stop_date" property="stopDate" />
+        <result column="leave_date" property="leaveDate" />
+        <result column="price" property="price" />
+        <result column="total" property="total" />
+        <result column="payment_sum" property="paymentSum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, car_id, type, stop_date, leave_date, price, total, payment_sum
+    </sql>
+
+    <select id="accountByDate" resultType="java.math.BigDecimal">
+        SELECT
+            sum( payment_sum )
+        FROM
+            `tb_car_stop_log`
+        WHERE
+            TO_DAYS( leave_date ) = TO_DAYS( #{dateTime} );
+    </select>
+</mapper>
